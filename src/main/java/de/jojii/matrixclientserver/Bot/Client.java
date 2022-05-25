@@ -43,7 +43,7 @@ public class Client {
                 loginData.setUser_id(object1.getString("user_id"));
                 this.loginData = loginData;
                 httpHelper.setAccess_token(loginData.getAccess_token());
-                syncee.startSyncee();
+                //syncee.startSyncee();
             }
             if (onResponse != null) {
                 onResponse.onResponse(loginData);
@@ -65,7 +65,7 @@ public class Client {
                 loginData.setSuccess(true);
                 isLoggedIn = true;
                 this.loginData = loginData;
-                syncee.startSyncee();
+                //syncee.startSyncee();
             } else {
                 loginData.setSuccess(false);
             }
@@ -356,11 +356,13 @@ public class Client {
             if (callback != null) {
                 try {
                     JSONObject object = new JSONObject((String) responsedata);
-                    if(object.has("room_id")){
+                    callback.onData(object);
+
+                    /*if(object.has("room_id")){
                         callback.onData(object.getString("room_id"));
                     }else{
                         callback.onData(object);
-                    }
+                    }*/
                 } catch (JSONException ee) {
                     ee.printStackTrace();
                 }
